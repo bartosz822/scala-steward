@@ -44,6 +44,7 @@ class SbtAlgTest extends AnyFunSuite with Matchers {
         .unsafeRunSync()
     state shouldBe MockState.empty.copy(
       commands = Vector(
+        List("read", s"$repoDir/.scala-steward.conf"),
         List(
           "TEST_VAR=GREAT",
           "ANOTHER_TEST_VAR=ALSO_GREAT",
@@ -55,7 +56,9 @@ class SbtAlgTest extends AnyFunSuite with Matchers {
           "-no-colors",
           s";$setOffline;$crossStewardDependencies;$reloadPlugins;$stewardDependencies"
         ),
+        List("read", s"$repoDir/.scala-steward.conf"),
         List("read", s"$repoDir/project/build.properties"),
+        List("read", s"$repoDir/.scala-steward.conf"),
         List("read", s"$repoDir/.scalafmt.conf")
       ),
       files = files
